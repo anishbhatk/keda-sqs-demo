@@ -1,0 +1,18 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::121835991040:oidc-provider/oidc.eks.ap-south-2.amazonaws.com/id/7F772D70001B798DB2AAC429B85D3DB6"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "oidc.eks.ap-south-2.amazonaws.com/id/7F772D70001B798DB2AAC429B85D3DB6:aud": "sts.amazonaws.com",
+          "oidc.eks.ap-south-2.amazonaws.com/id/7F772D70001B798DB2AAC429B85D3DB6:sub": "system:serviceaccount:keda-demo:keda-sqs-worker"
+        }
+      }
+    }
+  ]
+}

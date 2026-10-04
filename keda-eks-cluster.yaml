@@ -1,0 +1,39 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: keda-sqs-lab
+  region: ap-south-2
+  version: "1.36"
+
+vpc:
+  id: vpc-08d0059cf15c1f00f
+  subnets:
+    public:
+      ap-south-2a:
+        id: subnet-0bfc5d0cf6f32b635
+      ap-south-2b:
+        id: subnet-0adf611e18c816749
+      ap-south-2c:
+        id: subnet-0b63c7d0c9128faf0
+
+managedNodeGroups:
+  - name: keda-workers
+    instanceType: t3.small
+    amiFamily: AmazonLinux2023
+
+    minSize: 2
+    desiredCapacity: 2
+    maxSize: 2
+
+    volumeSize: 20
+    volumeType: gp3
+
+    privateNetworking: false
+
+    labels:
+      workload: keda-demo
+
+    tags:
+      Project: keda-sqs-lab
+      Environment: lab

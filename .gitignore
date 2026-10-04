@@ -1,0 +1,32 @@
+# AWS / credentials
+.aws/
+*.pem
+*.key
+.env
+.env.*
+
+# Kubernetes local configuration
+kubeconfig
+.kube/
+*.kubeconfig
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Terraform / state (if added later)
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Logs
+*.log

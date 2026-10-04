@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: sqs-worker
+  namespace: keda-demo
+
+spec:
+  replicas: 0
+
+  selector:
+    matchLabels:
+      app: sqs-worker
+
+  template:
+    metadata:
+      labels:
+        app: sqs-worker
+
+    spec:
+      serviceAccountName: keda-sqs-worker
+
+      containers:
+        - name: worker
+          image: 121835991040.dkr.ecr.ap-south-2.amazonaws.com/keda-sqs-worker:v1
+
+          imagePullPolicy: Always
+
+          env:
+            - name: QUEUE_URL
+              value: "https://sqs.ap-south-2.amazonaws.com/121835991040/keda-demo-queue"
+
+            - name: WORK_TIME
+              value: "10"
+
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+
+            limits:
+              cpu: "250m"
+              memory: "128Mi"

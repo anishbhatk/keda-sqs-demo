@@ -1,0 +1,27 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+
+metadata:
+  name: sqs-worker-scaler
+  namespace: keda-demo
+
+spec:
+  scaleTargetRef:
+    name: sqs-worker
+
+  minReplicaCount: 0
+  maxReplicaCount: 10
+
+  pollingInterval: 5
+  cooldownPeriod: 30
+
+  triggers:
+    - type: aws-sqs-queue
+
+      metadata:
+        queueURL: "https://sqs.ap-south-2.amazonaws.com/121835991040/keda-demo-queue"
+        queueLength: "5"
+        awsRegion: "ap-south-2"
+
+      authenticationRef:
+        name: keda-aws-auth

@@ -1,0 +1,13 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadQueueAttributesForScaling",
+      "Effect": "Allow",
+      "Action": [
+        "sqs:GetQueueAttributes"
+      ],
+      "Resource": "arn:aws:sqs:ap-south-2:121835991040:keda-demo-queue"
+    }
+  ]
+}
